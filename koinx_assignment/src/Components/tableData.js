@@ -21,29 +21,11 @@ const TableData = () => {
 
         fetchData();
     }, []);
-    console.log(tableData, "tableData")
 
     return (
         <>
             <div className='container'>
-                <div>
-                    <h3 className='m-4'>Top 100 Cryptocurrencies by Market Cap</h3>
-                    <div className='row'>
-                        <div className='col'>
-                            <button className='m-2 btn btn-light rounded-2 '>
-                                <span className='pe-1 text-muted'><FiStar /></span>Favorites</button>
-                            <button className='m-2 btn btn-light rounded-2 text-primary'>CryptoCurrencies</button>
-                            <button className='m-2 btn btn-light rounded-2 '>DeFi</button>
-                            <button className='m-2 btn btn-light rounded-2 '>NFT's & Collecctables</button>
-                        </div>
-                        <div className='col'>
-                            <p>show rows</p>
-                            <button className='m-2 btn btn-light rounded-2 '>
-                                <span><FiChevronDown /></span>
-                                100</button>
-                        </div>
-                    </div>
-                </div>
+
                 <table className="table">
                     <thead>
                         <tr>
@@ -61,7 +43,7 @@ const TableData = () => {
                     </thead>
                     <tbody>
                         {tableData.map((tableData) => (
-                            <tr scope="row" key={tableData.id}>
+                            <tr scope="row" key={tableData.id} data-toggle="modal" data-target="#exampleModal">
                                 <td><FiStar /></td>
                                 <td>
                                     {tableData.market_cap_rank}
@@ -91,7 +73,11 @@ const TableData = () => {
                                 </td>
                                 <td>
                                     <span>$</span>
-                                    <NumericFormat value={tableData.total_volume} displayType="text" thousandSeparator={true} decimalScale={2} />
+                                    <NumericFormat value={tableData.total_volume} displayType="text" thousandSeparator={true} decimalScale={2} /> <br></br>
+                                    <span className='text-muted' style={{ fontSize: "12px" }}>
+                                        <NumericFormat value={tableData.atl_change_percentage} displayType="text" thousandSeparator={true} decimalScale={2} />
+                                        <span className='ps-1'>BTC</span> </span>
+
                                 </td>
                                 <td>
                                     <span>
@@ -112,33 +98,9 @@ const TableData = () => {
                         ))}
                     </tbody>
                 </table>
+
             </div>
 
-            {/* --------------Model popup--------- */}
-
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                Launch demo modal
-            </button>
-
-            <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <h1>sbchbhcbhd</h1>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </>
     )
